@@ -1,0 +1,14 @@
+<table border="1">
+    {% for city in cities %}
+    <tr>
+        {% for cell in city.dump() %}
+        <td>
+            {{ cell }}
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+{{ form(createForm) }}
+{{ form(updateForm) }}
+{{ form(dropForm) }}
