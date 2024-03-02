@@ -36,7 +36,7 @@ class CityType extends AbstractType
             ;
         }
         else // if ($options['type'] == 'create') 
-        {
+        {            
             $builder
                 ->setMethod("POST")
                 ->setAction('/city/page')
@@ -44,9 +44,9 @@ class CityType extends AbstractType
                 ->add('country', TextType::class)
                 ->add('population', IntegerType::class)
                 ->add('save', SubmitType::class)
-            ;
+            ;            
         }
-    }
+    }    
 
     public function configureOptions(OptionsResolver $resolver): void
     {

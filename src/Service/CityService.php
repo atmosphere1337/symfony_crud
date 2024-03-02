@@ -4,7 +4,9 @@ use App\Entity\City;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CityService {
-    public function __construct(public EntityManagerInterface $entityManager) {
+    public function __construct(public EntityManagerInterface $entityManager,
+                                
+    ) {
 
     }
     public function read() {

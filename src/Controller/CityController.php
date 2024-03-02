@@ -9,19 +9,22 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\CityType;
 use Symfony\Component\Form\FormFactoryInterface;
 use App\Service\CityService;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
 class CityController extends AbstractController {
-	#[Route('/city/page', methods: ['GET', 'POST'])]
+	#[Route('/city/page', methods: ['GET', 'POST'], name: 'pageroot')]
 	public function cityPageAction(
 			Request $request,
 			FormFactoryInterface $formFactory,
-			CityService $cityService
+			CityService $cityService,
+			ValidatorInterface $validator,
 	) {
+		$this->denyAccessUnlessGranted('IS_AUTHENTICATED');
 		$city = new City();
-		$createForm = $formFactory->createNamed('createForm', CityType::class, $city, ['type' => 'create']);
-		$updateForm = $formFactory->createNamed('updateForm', CityType::class, $city, ['type' => 'update']);
-		$dropForm = $formFactory->createNamed('dropForm', CityType::class, $city, ['type' => 'drop']);
+		$createForm = $formFactory->createNamed('createForm', CityType::class, $city, ['type' => 'create', 'validation_groups' => ['create']]);
+		$updateForm = $formFactory->createNamed('updateForm', CityType::class, $city, ['type' => 'update','validation_groups' => ['update']]);
+		$dropForm = $formFactory->createNamed('dropForm', CityType::class, $city, ['type' => 'drop','validation_groups' => ['drop']]);
 
 		$context = "Hello world";
 		
@@ -31,6 +34,7 @@ class CityController extends AbstractController {
 		
 		if ($createForm->isSubmitted() && $createForm->isValid()) {	
 			$formData = $createForm->getData();
+			//$validator->validate($formData, null, );
 			$cityService->create($formData);
 			//$context = "1";
 		}

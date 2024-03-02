@@ -1,0 +1,8 @@
+App\Entity\City:
+  properties:
+    country:
+      - NotBlank: { groups: [update, create] }
+      - Regex:
+          pattern: '/^\w+$/'
+          groups: [update, create]
+      - Length: { min: 3, groups: [update, create] }
