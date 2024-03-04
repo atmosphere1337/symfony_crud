@@ -34,7 +34,6 @@ class CityController extends AbstractController {
 		
 		if ($createForm->isSubmitted() && $createForm->isValid()) {	
 			$formData = $createForm->getData();
-			//$validator->validate($formData, null, );
 			$cityService->create($formData);
 			//$context = "1";
 		}
@@ -47,6 +46,9 @@ class CityController extends AbstractController {
 			$formData = $createForm->getData();
 			$cityService->drop($formData);
 			//$context = "3";
+		}
+		if ($request->getMethod() == "POST") {
+			return $this->redirect($this->generateUrl('pageroot'));
 		}
 		$cities = $cityService->read();;
 		return $this->render('citypage.html.twig', [ 'context' => $context,
