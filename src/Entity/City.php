@@ -79,4 +79,10 @@ class City
             $this->population,
         ];
     }
+
+    public function setAll($city, $country, $population) {
+        $this->city = $city;
+        $this->country = $country;
+        $this->population = $population;
+    }
 }
